@@ -1,0 +1,5 @@
+{
+  "name": "ARG Chrome 2016 Emulator",
+  "description": "A web-based simulation of the 2016 Google Chrome browser for an ARG puzzle game.",
+  "requestFramePermissions": []
+}

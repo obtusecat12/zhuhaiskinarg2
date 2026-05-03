@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>No.53163145 - 紫岛揭示板</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'board-bg': '#fcfaff', // Very light purple/cream
+              'board-purple': '#581c87', // Dark purple for text
+              'board-red': '#cc1105', // Keep for warnings/titles
+              'board-accent': '#e9d5ff', // Light purple for headers
+              'reply-bg': '#f3e8ff', // Reply background
+              'link-blue': '#07d',
+            },
+            fontSize: {
+              'tiny': '12px',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: #fcfaff; 
+        color: #444;
+      }
+      /* Custom scrollbar for sidebar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(88, 28, 135, 0.2);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/island/index.tsx"></script>
+  </body>
+</html>

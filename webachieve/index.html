@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>时光档案馆：时光回溯机</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Microsoft YaHei", "SimHei", "Segoe UI", Tahoma, sans-serif;
+        background-color: #f0f5f9;
+        color: #1e395b;
+        background-image: linear-gradient(to bottom, #ffffff 0%, #e0eef8 100%);
+        background-attachment: fixed;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* 
+       * Aero Design System (c. 2009-2012)
+       * Characterized by:
+       * 1. Hard-stop gradients (50% cut)
+       * 2. Inner strokes (1px white inset)
+       * 3. Soft drop shadows
+       * 4. Cool blue/grey color palette
+       */
+
+      /* Classic Aero Glass Button */
+      .aero-btn {
+        background: linear-gradient(to bottom, #f2f7fc 0%, #dbeaf9 49%, #b7d6f6 50%, #dceaf9 100%);
+        border: 1px solid #7096c9;
+        border-radius: 3px;
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 1px 2px rgba(0,0,0,0.1);
+        color: #1e395b;
+        cursor: pointer;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+        transition: border-color 0.2s, box-shadow 0.2s;
+        font-family: "Segoe UI", sans-serif;
+      }
+      .aero-btn:hover {
+        background: linear-gradient(to bottom, #eaf6fd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%);
+        border-color: #3c7fb1;
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.2), 0 0 3px #66aadd;
+      }
+      .aero-btn:active {
+        background: linear-gradient(to bottom, #bed6f0 0%, #a0c2e6 49%, #8ab2db 50%, #b3d1f0 100%);
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        border-color: #2c628b;
+        transform: translateY(1px);
+      }
+
+      /* Primary Action Button (Shiny Blue) */
+      .aero-btn-primary {
+        background: linear-gradient(to bottom, #f0f9ff 0%, #cbebff 47%, #a1dbff 50%, #e2f4ff 100%);
+        border: 1px solid #2c628b;
+        border-radius: 3px;
+        color: #1e395b;
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4), 0 1px 2px rgba(0,0,0,0.15);
+        font-weight: bold;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+      }
+      .aero-btn-primary:hover {
+        background: linear-gradient(to bottom, #f5fcff 0%, #dcf1ff 47%, #b6e4ff 50%, #effaff 100%);
+        border-color: #204d74;
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 0 5px rgba(49, 149, 219, 0.6);
+      }
+
+      /* Input Field with Inner Shadow */
+      .aero-input {
+        border: 1px solid #8e9bb3;
+        border-top-color: #6d7b94;
+        background-color: #fff;
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.1), inset 0 0 0 1px #fcfcfc;
+        border-radius: 2px;
+        color: #000;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .aero-input:focus {
+        border-color: #3195db;
+        box-shadow: 0 0 0 1px rgba(49,149,219,0.5), inset 0 1px 2px rgba(0,0,0,0.1);
+        outline: none;
+      }
+
+      /* Panel styling */
+      .aero-panel {
+        background: #fff;
+        border: 1px solid #aebcd0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        border-radius: 4px;
+        overflow: hidden; /* For header border radius */
+      }
+      
+      /* The classic glossy header seen in Win7 windows */
+      .aero-panel-header {
+        background: linear-gradient(to bottom, #ffffff 0%, #ebf3fa 49%, #dcebf8 50%, #f2f8fd 100%);
+        border-bottom: 1px solid #b6c7d9;
+        padding: 10px 15px;
+      }
+
+      /* Gold/Yellow Variant for Save Page Now */
+      .aero-panel-header-gold {
+        background: linear-gradient(to bottom, #ffffff 0%, #fdf8e6 49%, #f8efce 50%, #fcf6da 100%);
+        border-bottom: 1px solid #e0d0a0;
+        padding: 10px 15px;
+      }
+      
+      .aero-btn-gold {
+        background: linear-gradient(to bottom, #fff9dd 0%, #feeeb0 49%, #fce68d 50%, #fef3b8 100%);
+        border: 1px solid #dcb548;
+        border-radius: 3px;
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 1px 2px rgba(0,0,0,0.1);
+        color: #5c4e08;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+        font-weight: bold;
+        cursor: pointer;
+        font-family: "Segoe UI", sans-serif;
+      }
+      .aero-btn-gold:hover {
+        background: linear-gradient(to bottom, #fffbf0 0%, #fff4c9 49%, #fdeca2 50%, #fff8d0 100%);
+        border-color: #c99f2e;
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.2), 0 0 3px #ffe066;
+      }
+      .aero-btn-gold:active {
+        background: linear-gradient(to bottom, #fcefa1 0%, #f8e178 49%, #f6da58 50%, #fdf098 100%);
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        border-color: #b38b24;
+        transform: translateY(1px);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.3.1",
+    "react/": "https://esm.sh/react@18.3.1/",
+    "react-dom": "https://esm.sh/react-dom@18.3.1",
+    "react-dom/": "https://esm.sh/react-dom@18.3.1/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.35.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/webachieve/index.tsx"></script>
+  </body>
+</html>
