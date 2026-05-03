@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import FakeChromeBrowser from './components/FakeChromeBrowser';
 import ShadowWrapper from './components/ShadowWrapper';
 import Win7Taskbar from './components/Win7Taskbar';
@@ -363,6 +364,7 @@ export default function App() {
         }} 
         onShowDesktop={() => setIsMinimized(true)}
       />
+      <SpeedInsights />
     </div>
   );
 }
