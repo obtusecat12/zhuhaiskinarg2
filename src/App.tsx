@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import FakeChromeBrowser from './components/FakeChromeBrowser';
 import ShadowWrapper from './components/ShadowWrapper';
 import Win7Taskbar from './components/Win7Taskbar';
@@ -337,7 +338,7 @@ export default function App() {
             打开文件所在的位置
           </div>
           <div className="h-px bg-gray-300 my-1 mx-1" />
-          <div className="px-6 py-1 text-gray-400 cursor-default flex items-center">从任务栏取消固定</div>
+          <div className="px-6 py-1 text-gray-400 cursor-default flex items-center">从任��栏取消固定</div>
           <div className="h-px bg-gray-300 my-1 mx-1" />
           <div className="px-6 py-1 hover:bg-[#91c9f7] hover:text-black cursor-default flex items-center">剪切</div>
           <div className="px-6 py-1 hover:bg-[#91c9f7] hover:text-black cursor-default flex items-center">复制</div>
@@ -363,6 +364,7 @@ export default function App() {
         }} 
         onShowDesktop={() => setIsMinimized(true)}
       />
+      <Analytics />
     </div>
   );
 }
